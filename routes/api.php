@@ -33,6 +33,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Add more routes as needed
 });
 
+Route::prefix('/challenge')->group(function () {
+    Route::post('/all', [ChallengeController::class, 'index']);
+});
+
 // Route::middleware(['web', 'auth'])->group(function () {
 //     // Your routes here...
 //     Route::prefix('/challenge')->group(function () {

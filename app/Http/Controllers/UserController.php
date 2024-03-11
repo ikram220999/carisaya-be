@@ -18,7 +18,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
-            return response()->json(['access_token' => $token]);
+            return response()->json(['access_token' => $token, 'user' => $user]);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
