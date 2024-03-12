@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guess;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuessController extends Controller
 {
@@ -29,6 +30,22 @@ class GuessController extends Controller
     public function store(Request $request)
     {
         //
+        $user = Auth::user();
+
+        if($user){
+            $guess = new Guess();
+            $guess->id_challenge = $request->idChallenge;
+            $guess->id_user = $user->id;
+            $guess->point = $request->point;
+            $guess->latitude = $request->lat;
+            $guess->longitude = $request->lng;
+            $guess->save();
+
+            return response()->json($guess, 200);
+        }else {
+            return response()->json(null, 400);
+        }
+
     }
 
     /**

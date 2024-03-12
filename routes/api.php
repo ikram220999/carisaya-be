@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\GuessController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/new', [ChallengeController::class, 'store']);
     });
 
+    Route::prefix('/guess')->group(function () {
+        Route::post('/submit', [GuessController::class, 'store']);
+    });
     // Add more routes as needed
 });
 
 Route::prefix('/challenge')->group(function () {
     Route::post('/all', [ChallengeController::class, 'index']);
+    Route::get('/{id}', [ChallengeController::class, 'show']);
+
 });
 
 // Route::middleware(['web', 'auth'])->group(function () {

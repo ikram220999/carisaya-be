@@ -87,9 +87,13 @@ class ChallengeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Challenge $challenge)
+    public function show($id)
     {
         //
+        $challenge = Challenge::find($id);
+
+        return response()->json($challenge, 200);
+
     }
 
     /**
